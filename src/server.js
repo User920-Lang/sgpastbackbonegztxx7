@@ -19,6 +19,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/health', (req, res) => res.json({ status: 'ok', server: 'PastBackboneGztxx7' }));
+app.get('/dashboard/token', (req, res) => res.json({ token: process.env.API_TOKEN || '' }));
 app.use('/dashboard', uiRoutes);
 
 app.use(authMiddleware);
