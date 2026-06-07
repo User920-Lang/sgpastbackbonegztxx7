@@ -176,8 +176,17 @@ router.get('/', (req, res) => {
 
 </main>
 <script>
-  const TOKEN = '${process.env.API_TOKEN || ''}';
-  const headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + TOKEN };
+  let TOKEN = '';
+  const headers = { 'Content-Type': 'application/json', 'Authorization': '' };
+
+  async function initToken() {
+    try {
+      const r = await fetch('/dashboard/token');
+      const d = await r.json();
+      TOKEN = d.token || '';
+      headers['Authorization'] = 'Bearer ' + TOKEN;
+    } catch {}
+  }
   let allTournaments = [];
 
   const statusMap = { 0:'Agendado',1:'Inscrições',2:'Em andamento',3:'Finalizado',4:'Cancelado',6:'Ativo' };
@@ -307,9 +316,11 @@ router.get('/', (req, res) => {
     } catch { msg.className='msg err'; msg.textContent='Erro ao criar.'; }
   });
 
-  fetchTournaments();
-  loadConfig();
-  setInterval(fetchTournaments, 5000);
+  initToken().then(() => {
+    fetchTournaments();
+    loadConfig();
+    setInterval(fetchTournaments, 5000);
+  });
 </script>
 </body>
 </html>`);
