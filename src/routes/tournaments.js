@@ -23,16 +23,22 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const { tournamentName, themeColor, imageUrl, description } = req.body;
+  const { tournamentName } = req.body;
   if (!tournamentName) return res.status(400).json({ error: 'tournamentName required' });
-  const t = TournamentManager.create({ tournamentName, themeColor, imageUrl, description });
+  const t = TournamentManager.create(req.body);
   res.status(201).json(t);
 });
 
+router.post('/:id/cancel', (req, res) => {
+  const result = TournamentManager.cancel(req.params.id);
+  if (result.error) return res.status(400).json(result);
+  res.json(result);
+});
+
 router.post('/:id/register', (req, res) => {
-  const { playerId, playerName } = req.body;
+  const { playerId, playerName, gems } = req.body;
   if (!playerId || !playerName) return res.status(400).json({ error: 'playerId and playerName required' });
-  const result = TournamentManager.register(req.params.id, playerId, playerName);
+  const result = TournamentManager.register(req.params.id, playerId, playerName, gems || 0);
   if (result.error) return res.status(400).json(result);
   res.json(result);
 });
