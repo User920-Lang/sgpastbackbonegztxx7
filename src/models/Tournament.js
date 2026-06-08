@@ -30,7 +30,7 @@ function createTournament(overrides = {}) {
   const mapData    = getMap(mapName) || { name: mapName, id: 'level1_tile' };
 
   return {
-    id:                  Date.now(),
+    id:                  overrides.id || Date.now(),
     tournamentName:      overrides.tournamentName || 'Classic Tournament',
     description:         overrides.description || '',
     additionalDescription: '',
@@ -47,13 +47,13 @@ function createTournament(overrides = {}) {
     map:                 mapData.name,
     mapId:               mapData.id,
     roundCount,
+    gemCost:             parseInt(overrides.gemCost) || 0,
     phases:              [createPhase({ rounds })],
     winner:              null,
     invite:              { status: UserStatus.INVITED, finalPlace: 0 },
     hasAllDataLoaded:    true,
     participants:        [],
     createdAt:           now.toISOString(),
-    ...overrides,
   };
 }
 
