@@ -26,19 +26,19 @@ function createTournament(overrides = {}) {
   const startTime  = new Date(now.getTime() + 15 * 60 * 1000);
   const roundCount = parseInt(overrides.roundCount) || 5;
   const rounds     = Array.from({ length: roundCount }, (_, i) => createRound(i + 1));
-  const mapName    = overrides.map || 'tile fall';
+  const mapName    = overrides.map || 'block dash';
   const mapData    = getMap(mapName) || { name: mapName, id: 'level1_tile' };
 
   return {
     id:                  overrides.id || Date.now(),
-    tournamentName:      overrides.tournamentName || 'Classic Tournament',
+    tournamentName:      overrides.tournamentName || 'SGPast Tourney 1v1',
     description:         overrides.description || '',
     additionalDescription: '',
-    imageUrl:            overrides.imageUrl || '',
-    iconUrl:             overrides.iconUrl || '',
+    imageUrl:            overrides.imageUrl || 'https://cdn.discordapp.com/attachments/1418030482653708329/1498871528253816964/d85dddabdc5d2e8657c1dee908a83634.png?ex=6a282124&is=6a26cfa4&hm=c5c9520bba403c50cfa5873f39250cee357021516ff7c2f871fb8601dd37a507&',
+    iconUrl:             overrides.iconUrl || 'https://cdn.discordapp.com/attachments/1418030482653708329/1498871528253816964/d85dddabdc5d2e8657c1dee908a83634.png?ex=6a282124&is=6a26cfa4&hm=c5c9520bba403c50cfa5873f39250cee357021516ff7c2f871fb8601dd37a507&',
     sponsorImageUrl:     overrides.sponsorImageUrl || '',
-    themeColor:          overrides.themeColor || '#FF0000',
-    status:              TournamentStatus.ACTIVE,
+    themeColor:          overrides.themeColor || '#0062ff',
+    status:              TournamentStatus.REGISTRATION,
     type:                TournamentType.CLASSIC,
     time:                startTime.toISOString(),
     currentPhaseId:      1,
