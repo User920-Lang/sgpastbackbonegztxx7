@@ -6,13 +6,13 @@ const CONFIG_PATH = path.join(__dirname, '../../tournament.config.json');
 
 const DEFAULT_CONFIG = {
   id: 10,
-  tournamentName: 'Classic Tournament',
+  tournamentName: 'SGPast Tourney 1v1',
   description: '',
-  themeColor: '#FF0000',
-  imageUrl: '',
-  iconUrl: '',
+  themeColor: '#0062ff',
+  imageUrl: 'https://cdn.discordapp.com/attachments/1418030482653708329/1498871528253816964/d85dddabdc5d2e8657c1dee908a83634.png?ex=6a282124&is=6a26cfa4&hm=c5c9520bba403c50cfa5873f39250cee357021516ff7c2f871fb8601dd37a507&',
+  iconUrl: 'https://cdn.discordapp.com/attachments/1418030482653708329/1498871528253816964/d85dddabdc5d2e8657c1dee908a83634.png?ex=6a282124&is=6a26cfa4&hm=c5c9520bba403c50cfa5873f39250cee357021516ff7c2f871fb8601dd37a507&',
   sponsorImageUrl: '',
-  map: 'tile fall',
+  map: 'block dash',
   roundCount: 5,
   gemCost: 0,
 };
@@ -54,7 +54,7 @@ class TournamentManagerClass {
     return config;
   }
 
-  getAll() { return Array.from(this.tournaments.values()).filter(t => t.status !== 4); }
+  getAll() { return Array.from(this.tournaments.values()); }
 
   getById(id) { return this.tournaments.get(Number(id)) || null; }
 
