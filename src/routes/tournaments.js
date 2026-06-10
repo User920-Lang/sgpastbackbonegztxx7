@@ -29,6 +29,15 @@ router.post('/', (req, res) => {
   res.status(201).json(t);
 });
 
+router.post('/:id/reset', (req, res) => {
+  const t = TournamentManager.getById(req.params.id);
+  if (!t) return res.status(404).json({ error: 'Tournament not found' });
+  t.participants = [];
+  t.status = 1; // back to REGISTRATION
+  TournamentManager.brackets.delete(Number(req.params.id));
+  res.json({ success: true });
+});
+
 router.post('/:id/cancel', (req, res) => {
   const result = TournamentManager.cancel(req.params.id);
   if (result.error) return res.status(400).json(result);
