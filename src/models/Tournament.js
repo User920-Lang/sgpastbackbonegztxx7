@@ -23,7 +23,7 @@ function createPhase(overrides = {}) {
 
 function createTournament(overrides = {}) {
   const now        = new Date();
-  const startTime  = new Date(now.getTime() + 15 * 60 * 1000);
+  const startTime  = new Date(now.getTime() + 24 * 60 * 60 * 1000);
   const roundCount = parseInt(overrides.roundCount) || 5;
   const rounds     = Array.from({ length: roundCount }, (_, i) => createRound(i + 1));
   const mapName    = overrides.map || 'block dash';
@@ -48,6 +48,13 @@ function createTournament(overrides = {}) {
     mapId:               mapData.id,
     roundCount,
     gemCost:             parseInt(overrides.gemCost) || 0,
+    prizePool:           overrides.prizePool || {
+      1: 500,
+      2: 250,
+      3: 150,
+      4: 100,
+      5: 50,
+    },
     phases:              [createPhase({ rounds })],
     winner:              null,
     invite:              { status: UserStatus.INVITED, finalPlace: 0 },
