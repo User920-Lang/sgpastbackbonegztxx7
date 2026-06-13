@@ -14,7 +14,7 @@ const DEFAULT_CONFIG = {
   sponsorImageUrl: '',
   map: 'block dash',
   roundCount: 5,
-  gemCost: 0,
+  gemCost: 10,
 };
 
 class TournamentManagerClass {
